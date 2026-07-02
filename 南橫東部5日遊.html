@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南橫山海戀 5日親子漫遊 (連結跳轉修復版) - 老陳導遊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Leaflet CSS & JS for the Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        
+        .timeline-line {
+            position: absolute; left: 1rem; top: 0.5rem; bottom: -0.5rem;
+            width: 2px; background-color: #E5E7EB; z-index: 0;
+        }
+        .timeline-dot { z-index: 10; }
+        .item-content { position: relative; z-index: 10; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        
+        .hotel-info-box {
+            background-color: #f8fafc; border-left: 4px solid #3b82f6;
+            padding: 0.75rem; margin-top: 0.5rem; border-radius: 0.25rem;
+            font-size: 0.85rem; color: #334155;
+        }
+        .time-badge {
+            font-size: 0.75rem; display: flex; align-items: center; gap: 0.25rem;
+            color: #475569; background-color: #f1f5f9; padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem; white-space: nowrap;
+        }
+        .time-badge.leave { background-color: #fff1f2; color: #be123c; font-weight: 600; }
+        .drive-time {
+            font-size: 0.75rem; color: #64748b; display: flex; align-items: center; margin-bottom: 0.25rem;
+        }
+        .time-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem; margin-top: 0.25rem; }
+        .payment-alert { color: #dc2626; font-weight: bold; }
+        
+        /* Button Links */
+        .btn-link {
+            display: inline-flex; align-items: center; gap: 0.25rem;
+            padding: 0.35rem 0.75rem; border-radius: 0.375rem;
+            font-size: 0.8rem; transition: all 0.2s;
+            text-decoration: none; border: 1px solid;
+            position: relative; z-index: 30; cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .btn-link:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-official { background: #eff6ff; color: #2563eb; border-color: #dbeafe; }
+        .btn-video { background: #fef2f2; color: #dc2626; border-color: #fee2e2; }
+        .btn-search { background: #f8fafc; color: #475569; border-color: #e2e8f0; }
+        .btn-traffic { background: #fff7ed; color: #ea580c; border-color: #ffedd5; }
+        .btn-nav { background: #2563eb; color: white; border-color: #1d4ed8; font-weight: bold; }
+        .btn-nav:hover { background: #1d4ed8; }
+
+        /* Map Styles */
+        #map { height: 450px; width: 100%; border-radius: 0.75rem; z-index: 1; }
+        .custom-div-icon { background: transparent; border: none; }
+        .marker-pin {
+            width: 30px; height: 30px; border-radius: 50% 50% 50% 0;
+            background: #3b82f6; position: absolute; transform: rotate(-45deg);
+            left: 50%; top: 50%; margin: -15px 0 0 -15px;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center;
+        }
+        .marker-pin::after {
+            content: ''; width: 14px; height: 14px; margin: 8px 0 0 8px;
+            background: #fff; position: absolute; border-radius: 50%;
+        }
+        .marker-icon {
+            position: absolute; width: 22px; font-size: 14px;
+            left: 0; right: 0; margin: 8px auto; text-align: center;
+            color: white; z-index: 100; transform: rotate(45deg);
+        }
+        .pin-hotel { background: #ef4444; }
+        .pin-spot { background: #3b82f6; }
+        .pin-backup { background: #93c5fd; }
+        .pin-food { background: #10b981; }
+        .pin-gas { background: #8b5cf6; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-emerald-600 to-teal-500 text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-3xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold"><i class="fas fa-mountain mr-2"></i>南橫山海戀</h1>
+                <p class="text-xs text-emerald-100">2026/2/9 - 2/13 · 連結跳轉修復版</p>
+            </div>
+            <div class="text-right">
+                <span class="bg-white/20 px-2 py-1 rounded text-xs backdrop-blur-sm">
+                    <i class="fas fa-external-link-alt mr-1"></i>強制新視窗
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 py-6 space-y-6">
+
+        <!-- Map Section -->
+        <div class="bg-white rounded-xl shadow-sm p-4 border border-slate-200">
+            <h2 class="font-bold text-lg mb-3 flex items-center text-slate-700">
+                <i class="fas fa-map text-blue-500 mr-2"></i>行程全覽地圖
+            </h2>
+            <div id="map"></div>
+            <div class="flex gap-4 mt-3 text-xs justify-center flex-wrap">
+                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-red-500 mr-1"></span>住宿</div>
+                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-blue-500 mr-1"></span>主景點</div>
+                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-blue-300 mr-1"></span>備選/方案</div>
+                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-emerald-500 mr-1"></span>美食</div>
+                <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-violet-500 mr-1"></span>加油站</div>
+            </div>
+        </div>
+
+        <!-- Fuel Strategy Card -->
+        <div class="bg-white rounded-xl shadow-sm p-5 border-l-4 border-blue-500">
+            <div class="flex items-start gap-4">
+                <div class="bg-blue-100 p-3 rounded-full shrink-0">
+                    <i class="fas fa-gas-pump text-blue-600 text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="font-bold text-lg mb-1">油料補給策略</h2>
+                    <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                        <div class="bg-slate-100 p-2 rounded">
+                            <span class="block font-bold text-slate-700">Day 1</span>
+                            <span class="text-blue-600 font-bold">甲仙 (必加)</span>
+                        </div>
+                        <div class="bg-slate-100 p-2 rounded">
+                            <span class="block font-bold text-slate-700">Day 2</span>
+                            <span class="text-blue-600 font-bold">玉里 (建議)</span>
+                        </div>
+                        <div class="bg-slate-100 p-2 rounded">
+                            <span class="block font-bold text-slate-700">Day 4</span>
+                            <span class="text-blue-600 font-bold">花蓮市 (必加)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 1 -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden border-2 border-emerald-500">
+            <div class="bg-emerald-50 px-5 py-3 border-b border-emerald-100 flex justify-between items-center">
+                <h3 class="font-bold text-emerald-800"><i class="fas fa-check text-emerald-600 mr-2"></i>Day 1：南橫壯麗穿越</h3>
+                <span class="text-xs font-mono text-emerald-700 font-bold">02/09 (一)</span>
+            </div>
+            
+            <div class="p-5">
+                <div class="inline-flex items-center bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full text-sm font-bold mb-4">
+                    <i class="fas fa-clock mr-2"></i>建議出發時間：08:00 (準時)
+                </div>
+
+                <div class="relative pl-6 space-y-8">
+                    <div class="timeline-line"></div>
+                    
+                    <!-- Item -->
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow"></div>
+                        <h4 class="font-bold text-lg">秝芯旅店駁二館 出發</h4>
+                        <div class="hotel-info-box border-emerald-400 bg-emerald-50">
+                            <i class="fas fa-info-circle mr-1"></i><strong>昨晚入住資訊</strong><br>
+                            費用：$2,866.80 <span class="payment-alert">(需現場付款)</span>
+                        </div>
+                    </div>
+
+                    <!-- Item -->
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 1 小時 30 分</div>
+                        <h4 class="font-bold text-lg">甲仙 (加油/休息)</h4>
+                        <div class="time-grid">
+                            <div class="time-badge">預計 09:30</div>
+                            <div class="time-badge leave">最晚 10:30</div>
+                        </div>
+                        <p class="text-sm text-red-600 font-bold mb-1"><i class="fas fa-gas-pump"></i> 中油甲仙站(直營) 加滿油！</p>
+                        <p class="text-sm text-slate-500 mb-2">推薦：三冠王/小奇芋冰、徐財記芋粿。</p>
+                        <!-- LINKS -->
+                        <div class="flex gap-2 flex-wrap">
+                            <a href="https://www.google.com/search?q=甲仙+徐財記芋粿" class="btn-link btn-search"><i class="fab fa-google"></i> 美食評價</a>
+                        </div>
+                    </div>
+
+                    <!-- Item -->
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 1 小時 15 分</div>
+                        <h4 class="font-bold text-lg">梅山遊客中心 (午餐)</h4>
+                        <div class="time-grid">
+                            <div class="time-badge">預計 11:45</div>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-2">南橫西段最後補給站。</p>
+                        <!-- LINKS -->
+                        <div class="flex gap-2 flex-wrap">
+                            <a href="https://168.thb.gov.tw/" class="btn-link btn-traffic"><i class="fas fa-road"></i> 公路總局168路況</a>
+                            <a href="https://www.facebook.com/groups/429819163825828" class="btn-link btn-traffic"><i class="fab fa-facebook"></i> 南橫FB通報社團</a>
+                        </div>
+                    </div>
+
+                    <!-- Item -->
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 1 小時 (山路慢行)</div>
+                        <h4 class="font-bold text-lg">南橫埡口 (大關山隧道)</h4>
+                        <div class="time-grid">
+                            <div class="time-badge leave">最晚 13:15 通過</div>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-2">海拔2722m，注意保暖。</p>
+                        <!-- LINKS -->
+                        <div class="flex gap-2 flex-wrap">
+                            <a href="https://www.youtube.com/results?search_query=南橫埡口+雲海" class="btn-link btn-video"><i class="fab fa-youtube"></i> 雲海影片</a>
+                        </div>
+                    </div>
+
+                    <!-- Item -->
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-blue-500 border-2 border-white shadow"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 1 小時 (下坡慢行)</div>
+                        <h4 class="font-bold text-lg">入住：天龍飯店</h4>
+                        <div class="hotel-info-box">
+                             <div class="font-bold text-emerald-600 mb-1"><i class="fas fa-check-circle"></i> 費用：$3460 (已刷卡)</div>
+                        </div>
+                        <div class="flex gap-2 flex-wrap mt-2">
+                            <a href="https://www.chiefspa.com.tw/" class="btn-link btn-official"><i class="fas fa-globe"></i> 飯店官網</a>
+                            <a href="https://www.google.com/search?q=天龍飯店+晚餐" class="btn-link btn-search"><i class="fab fa-google"></i> 晚餐評價</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://www.google.com/maps/dir/秝芯旅店駁二館/台灣中油+甲仙站/高雄市甲仙區甲仙國民小學/梅山遊客中心/大關山隧道/天龍溫泉飯店" class="mt-6 block w-full text-center py-3 rounded-lg btn-link btn-nav justify-center">
+                    <i class="fas fa-map-marked-alt"></i> 開啟 Day 1 導航路線
+                </a>
+            </div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="bg-slate-100 px-5 py-3 border-b border-slate-200 flex justify-between items-center">
+                <h3 class="font-bold text-slate-700">Day 2：稻浪、玉里美食攻略</h3>
+                <span class="text-xs font-mono text-slate-500">02/10 (二)</span>
+            </div>
+            <div class="p-5">
+                <div class="inline-flex items-center bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full text-sm font-bold mb-4">
+                    <i class="fas fa-clock mr-2"></i>建議出發時間：09:00
+                </div>
+
+                <div class="relative pl-6 space-y-8">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 40 分鐘</div>
+                        <h4 class="font-bold text-lg">池上 (飯包/豆皮/伯朗大道)</h4>
+                        <div class="time-grid">
+                            <div class="time-badge">預計 10:00</div>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-2">
+                            1. <strong>悟饕池上飯包文化故事館</strong> (午餐)<br>
+                            2. 順路買 <strong>大池豆皮店</strong> (若還有)<br>
+                            3. <strong>伯朗大道</strong> 騎電動車
+                        </p>
+                        <!-- Reference Links -->
+                        <div class="flex gap-2 flex-wrap">
+                            <a href="https://www.erv-nsa.gov.tw/zh-tw/attractions/detail/197" class="btn-link btn-official"><i class="fas fa-globe"></i> 縱管處介紹</a>
+                            <a href="https://www.youtube.com/results?search_query=伯朗大道+電動車+租車" class="btn-link btn-video"><i class="fab fa-youtube"></i> 租車攻略</a>
+                        </div>
+                    </div>
+
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-200 border-2 border-white"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 30 分鐘</div>
+                        <h4 class="font-bold text-lg">玉里美食戰術</h4>
+                        <div class="time-grid">
+                            <div class="time-badge">預計 14:00</div>
+                        </div>
+                        <div class="bg-orange-50 border border-orange-200 p-3 rounded-lg text-sm text-orange-900 mb-2">
+                            <strong><i class="fas fa-chess-knight mr-1"></i> 老饕攻略：</strong><br>
+                            1. 先去抽 <strong>橋頭臭豆腐</strong> 號碼牌。<br>
+                            2. 等待時去吃 <strong>馬蓋先玉里麵</strong> (或阿發玉里麵)。<br>
+                            3. 回來剛好享用臭豆腐！
+                        </div>
+                        <div class="flex gap-2 flex-wrap">
+                            <a href="https://www.google.com/search?q=玉里橋頭臭豆腐+排隊" class="btn-link btn-search"><i class="fab fa-google"></i> 排隊現況</a>
+                        </div>
+                    </div>
+
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-blue-500 border-2 border-white shadow"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 30 分鐘</div>
+                        <h4 class="font-bold text-lg">入住：瑞穗風情民宿</h4>
+                        <div class="hotel-info-box">
+                            <div class="font-bold mb-1">費用：$2000 <span class="payment-alert">(需現場付款)</span></div>
+                            <div class="text-red-600 font-bold bg-red-50 p-2 rounded border border-red-200 mt-2">
+                                <i class="fas fa-phone-alt animate-pulse"></i> <strong>入住前20分鐘請撥打 0975-131-312</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://www.google.com/maps/dir/天龍溫泉飯店/池上伯朗大道/玉里鎮公所/瑞穗風情民宿" class="mt-6 block w-full text-center py-3 rounded-lg btn-link btn-nav justify-center">
+                    <i class="fas fa-map-marked-alt"></i> 開啟 Day 2 導航路線 (玉里鎮中心)
+                </a>
+            </div>
+        </div>
+
+        <!-- Day 3 -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="bg-slate-100 px-5 py-3 border-b border-slate-200 flex justify-between items-center">
+                <h3 class="font-bold text-slate-700">Day 3：縱谷山線親子遊</h3>
+                <span class="text-xs font-mono text-slate-500">02/11 (三)</span>
+            </div>
+            <div class="p-5">
+                <div class="inline-flex items-center bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full text-sm font-bold mb-4">
+                    <i class="fas fa-clock mr-2"></i>建議出發時間：09:30 (退房)
+                </div>
+
+                <div class="relative pl-6 space-y-8">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 10 分鐘</div>
+                        <h4 class="font-bold text-lg">瑞穗牧場</h4>
+                        <p class="text-sm text-slate-500 mb-2">餵乳牛、喝鮮奶、吃饅頭。</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <a href="https://www.google.com/search?q=瑞穗牧場+必吃" class="btn-link btn-search"><i class="fab fa-google"></i> 必吃推薦</a>
+                        </div>
+                    </div>
+
+                    <!-- Decision Point -->
+                    <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-xl relative -left-2 shadow-sm z-20">
+                        <h4 class="font-bold text-indigo-800 mb-2"><i class="fas fa-directions mr-2"></i>請選擇路線</h4>
+                        
+                        <!-- Plan A -->
+                        <details class="group mb-2 bg-white rounded border border-indigo-100">
+                            <summary class="p-3 font-bold text-slate-700 hover:bg-slate-50">
+                                🌲 方案 A：縱谷山線 (大農大富/光復糖廠)
+                            </summary>
+                            <div class="p-3 pt-0 text-sm text-slate-600 space-y-3 border-t border-slate-100 mt-2 pt-2">
+                                <p><strong>1. 大農大富平地森林：</strong>(車程15分) 龍貓隧道。</p>
+                                <p><strong>2. 午餐推薦：</strong>大陸餃子館(光復)，必點煎麵。</p>
+                                <p><strong>3. 光復糖廠：</strong>(車程15分) 吃冰餵魚。</p>
+                                <p><strong>4. 山姆先生咖啡館：</strong>(車程40分) 童話小屋拍照。</p>
+                                <a href="https://www.google.com/maps/dir/瑞穗風情民宿/瑞穗牧場/光復糖廠/大農大富平地森林園區/林田山林業文化園區/立川漁場/花蓮香城大飯店" class="block w-full bg-indigo-600 text-white text-center py-2 rounded mt-2 hover:bg-indigo-700 text-xs font-bold relative z-30 btn-link justify-center"><i class="fas fa-map-marked-alt"></i> 開啟【山線】導航</a>
+                            </div>
+                        </details>
+
+                        <!-- Plan B -->
+                        <details class="group bg-white rounded border border-indigo-100">
+                            <summary class="p-3 font-bold text-slate-700 hover:bg-slate-50">
+                                🌊 方案 B：東海岸海線 (新社梯田/看海)
+                            </summary>
+                            <div class="p-3 pt-0 text-sm text-slate-600 space-y-3 border-t border-slate-100 mt-2 pt-2">
+                                <p><strong>1. 新社梯田：</strong>(車程40分) 海邊稻田。</p>
+                                <p><strong>2. 大石鼻山步道：</strong>看無敵海景。</p>
+                                <p><strong>3. 午餐推薦：</strong>豐濱海鮮 (阿慶海鮮或口福海鮮)。</p>
+                                <p><strong>4. 芭崎眺望台：</strong>海灣制高點。</p>
+                                <a href="https://www.google.com/maps/dir/瑞穗風情民宿/瑞穗牧場/光復糖廠/新社梯田/大石鼻山步道/芭崎休息區/花蓮香城大飯店" class="block w-full bg-blue-600 text-white text-center py-2 rounded mt-2 hover:bg-blue-700 text-xs font-bold relative z-30 btn-link justify-center"><i class="fas fa-map-marked-alt"></i> 開啟【海線】導航</a>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-blue-500 border-2 border-white shadow"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 50 分鐘 (進市區)</div>
+                        <h4 class="font-bold text-lg">入住：香城大飯店(花蓮店)</h4>
+                        <div class="hotel-info-box">
+                             <div class="font-bold text-emerald-600 mb-1"><i class="fas fa-check-circle"></i> 費用：$1346 (已刷卡)</div>
+                             <div class="text-amber-600"><i class="fas fa-utensils"></i> 注意：不含早餐</div>
+                        </div>
+                        <div class="mt-2 text-sm text-slate-600 bg-slate-50 p-2 rounded">
+                            <strong><i class="fas fa-moon mr-1"></i> 晚餐推薦 (東大門夜市)：</strong><br>
+                            蔣家官財板、第一家烤肉串(先點餐)、林記燒番麥、強蛋餅。
+                        </div>
+                        <div class="flex gap-2 flex-wrap mt-2">
+                            <a href="https://www.youtube.com/results?search_query=花蓮+東大門夜市+必吃+2025" class="btn-link btn-video"><i class="fab fa-youtube"></i> 夜市攻略</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 4 -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <div class="bg-slate-100 px-5 py-3 border-b border-slate-200 flex justify-between items-center">
+                <h3 class="font-bold text-slate-700">Day 4：花蓮慢活與食農教育</h3>
+                <span class="text-xs font-mono text-slate-500">02/12 (四)</span>
+            </div>
+            <div class="p-5">
+                <div class="inline-flex items-center bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full text-sm font-bold mb-4">
+                    <i class="fas fa-clock mr-2"></i>建議出發時間：09:30
+                </div>
+
+                <div class="relative pl-6 space-y-8">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 20 分鐘</div>
+                        <h4 class="font-bold text-lg">七星潭 & 柴魚博物館 (DIY)</h4>
+                        <p class="text-sm text-slate-500 mb-2">海邊疊石頭、看戰機。博物館體驗「刨柴魚DIY」。</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <a href="https://www.katsuo.com.tw/" class="btn-link btn-official"><i class="fas fa-globe"></i> 柴魚博物館</a>
+                        </div>
+                    </div>
+
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-200 border-2 border-white"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 15 分鐘</div>
+                        <h4 class="font-bold text-lg">花蓮市區美食與觀光</h4>
+                        <p class="text-sm text-slate-500 mb-2">
+                            午餐：<strong>液香/戴記扁食</strong> 或 <strong>玉里橋頭臭豆腐(花蓮店)</strong>。<br>
+                            點心：<strong>炸彈蔥油餅</strong> (復興街)。<br>
+                            景點：<strong>將軍府 1936 園區</strong> (日式古蹟)。
+                        </p>
+                        <div class="flex gap-2 flex-wrap">
+                            <a href="https://www.google.com/search?q=花蓮+將軍府1936" class="btn-link btn-search"><i class="fab fa-google"></i> 將軍府介紹</a>
+                        </div>
+                    </div>
+
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-blue-500 border-2 border-white shadow"></div>
+                        <h4 class="font-bold text-lg">續住：香城大飯店</h4>
+                        <div class="mt-2 text-sm text-slate-600 bg-slate-50 p-2 rounded">
+                            <strong><i class="fas fa-utensils mr-1"></i> 晚餐建議：</strong><br>
+                            日式 CP 值高：<strong>賴桑壽司屋</strong> / <strong>耕壽司</strong>。<br>
+                            中式合菜：<strong>闔家歡餐廳</strong>。
+                        </div>
+                    </div>
+                </div>
+                 <a href="https://www.google.com/maps/dir/花蓮香城大飯店/太魯閣遊客中心/佳興冰果室/七星潭/花蓮香城大飯店" class="mt-6 block w-full text-center py-3 rounded-lg btn-link btn-nav justify-center">
+                    <i class="fas fa-map-marked-alt"></i> 開啟 Day 4 導航路線
+                </a>
+            </div>
+        </div>
+
+        <!-- Day 5 -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden border-l-4 border-indigo-500">
+            <div class="bg-slate-100 px-5 py-3 border-b border-slate-200 flex justify-between items-center">
+                <h3 class="font-bold text-slate-700">Day 5：烤鴨野餐與蘇花漫遊</h3>
+                <span class="text-xs font-mono text-slate-500">02/13 (五)</span>
+            </div>
+            <div class="p-5">
+                <div class="inline-flex items-center bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full text-sm font-bold mb-4">
+                    <i class="fas fa-clock mr-2"></i>建議出發時間：09:00
+                </div>
+
+                <div class="relative pl-6 space-y-8">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white"></div>
+                        <h4 class="font-bold text-lg">花蓮市區 (早餐與採買)</h4>
+                        <div class="time-grid">
+                            <div class="time-badge">09:00 早餐</div>
+                            <div class="time-badge">10:00 採買</div>
+                            <div class="time-badge leave">10:30 取餐</div>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-1">
+                            1. 早餐：<strong>廟口紅茶</strong> (鋼管紅茶/大西點)。<br>
+                            2. 伴手禮：<strong>靚hó</strong> (花生醬/炒花生)。<br>
+                            3. 外帶午餐：<strong>皇佳味北平脆皮烤鴨</strong> <span class="text-red-500 font-bold">(10:00 一開門務必先打 03-835-5780 預訂)</span>。
+                        </p>
+                    </div>
+
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 50 分鐘</div>
+                        <h4 class="font-bold text-lg">台泥 DAKA 園區 (烤鴨野餐)</h4>
+                        <div class="time-grid">
+                            <div class="time-badge">12:20 抵達</div>
+                        </div>
+                        <p class="text-sm text-slate-500 mb-2">享用剛出爐的脆皮烤鴨，配星巴克咖啡。</p>
+                        <div class="flex gap-2 flex-wrap">
+                            <a href="https://www.tccdaka.com/" class="btn-link btn-official"><i class="fas fa-globe"></i> DAKA官網</a>
+                        </div>
+                    </div>
+
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-200 border-2 border-white"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 40 分鐘</div>
+                        <h4 class="font-bold text-lg">蘇澳漫遊 & 冷泉</h4>
+                        <p class="text-sm text-slate-500 mb-2">
+                            1. <strong>南方澳觀景台 / 內埤海灘</strong> 散步。<br>
+                            2. <strong>蘇澳冷泉公園</strong> 泡腳或個人湯屋。<br>
+                            3. 補給：<strong>宜蘭餅發明館</strong> 或 <strong>蜡藝蠟筆城堡</strong>。
+                        </p>
+                        <div class="flex gap-2 flex-wrap">
+                            <a href="https://luckyart.com.tw/" class="btn-link btn-official"><i class="fas fa-globe"></i> 蜡藝城堡</a>
+                        </div>
+                    </div>
+                    
+                    <div class="relative group item-content">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-emerald-900 border-2 border-white"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 30 分鐘</div>
+                        <h4 class="font-bold text-lg">宜蘭晚餐 (三選一)</h4>
+                        <div class="time-grid">
+                            <div class="time-badge">18:00 晚餐</div>
+                            <div class="time-badge leave">19:30 上國道</div>
+                        </div>
+                        <ul class="text-sm text-slate-600 list-disc list-inside bg-slate-100 p-2 rounded">
+                            <li><strong>礁溪甕窯雞：</strong>吃完直接上交流道 (快)。</li>
+                            <li><strong>年年小館：</strong>宜蘭手路菜 (精緻)。</li>
+                            <li><strong>來來牛排：</strong>加麵不加價 (孩子愛)。</li>
+                        </ul>
+                    </div>
+
+                    <div class="relative">
+                        <div class="timeline-dot absolute -left-6 top-1 w-4 h-4 rounded-full bg-slate-700 border-2 border-white"></div>
+                        <div class="drive-time"><i class="fas fa-car-side"></i> 車程約 1 - 1.5 小時 (視路況)</div>
+                        <h4 class="font-bold text-lg">抵達 新北三重</h4>
+                        <div class="time-grid">
+                            <div class="time-badge"><i class="fas fa-flag-checkered"></i> 預計 20:40</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="https://www.google.com/maps/dir/花蓮香城大飯店/台泥DAKA園區/南方澳觀景台/蘇澳冷泉公園/宜蘭餅發明館/礁溪溫泉公園/三重區" class="mt-6 block w-full text-center py-3 rounded-lg btn-link btn-nav justify-center">
+                    <i class="fas fa-map-marked-alt"></i> 開啟 Day 5 導航路線
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-6 text-center text-sm">
+        <p>祝闔家平安旅遊愉快！ — 老陳</p>
+    </footer>
+    
+    <script>
+        const map = L.map('map').setView([23.5, 121.3], 8); 
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        function createIcon(type) {
+            let colorClass = 'pin-spot';
+            let iconClass = 'fa-map-marker-alt';
+            
+            if (type === 'hotel') { colorClass = 'pin-hotel'; iconClass = 'fa-bed'; }
+            if (type === 'food') { colorClass = 'pin-food'; iconClass = 'fa-utensils'; }
+            if (type === 'gas') { colorClass = 'pin-gas'; iconClass = 'fa-gas-pump'; }
+            if (type === 'backup') { colorClass = 'pin-backup'; iconClass = 'fa-camera'; }
+
+            return L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div class='marker-pin ${colorClass}'><div class='marker-icon'><i class='fas ${iconClass}'></i></div></div>`,
+                iconSize: [30, 42],
+                iconAnchor: [15, 42],
+                popupAnchor: [0, -35]
+            });
+        }
+
+        const locations = [
+            // Day 1
+            { name: "秝芯旅店駁二館", lat: 22.6253, lng: 120.2858, type: "hotel", day: "Day 1 起點" },
+            { name: "甲仙中油加油站", lat: 23.0844, lng: 120.5905, type: "gas", day: "Day 1 必加" },
+            { name: "甲仙國小(美食區)", lat: 23.0833, lng: 120.5925, type: "food", day: "Day 1" },
+            { name: "南橫飲食店/梅山口飯店", lat: 23.2750, lng: 120.8300, type: "food", day: "Day 1 午餐" },
+            { name: "南橫埡口", lat: 23.2654, lng: 120.9602, type: "spot", day: "Day 1" },
+            { name: "天龍溫泉飯店", lat: 23.1755, lng: 121.0401, type: "hotel", day: "Day 1 住宿" },
+            
+            // Day 2
+            { name: "悟饕池上飯包", lat: 23.1235, lng: 121.2150, type: "food", day: "Day 2 午餐" },
+            { name: "大池豆皮店", lat: 23.1180, lng: 121.2100, type: "food", day: "Day 2 美食" },
+            { name: "池上伯朗大道", lat: 23.1001, lng: 121.2158, type: "spot", day: "Day 2" },
+            // Day 2 Yuli Food (Refined coords)
+            { name: "阿發玉里麵", lat: 23.3340, lng: 121.3140, type: "food", day: "Day 2 美食" },
+            { name: "馬蓋先美食", lat: 23.3355, lng: 121.3150, type: "food", day: "Day 2 美食" },
+            { name: "廣盛堂羊羹", lat: 23.3345, lng: 121.3145, type: "food", day: "Day 2 美食" },
+            { name: "阿嬤的燒仙草", lat: 23.3338, lng: 121.3142, type: "food", day: "Day 2 美食" },
+            { name: "玉里橋頭臭豆腐", lat: 23.3330, lng: 121.3135, type: "food", day: "Day 2 美食" },
+            { name: "玉里花東臭豆腐", lat: 23.3350, lng: 121.3160, type: "food", day: "Day 2 美食" },
+            { name: "紐澳華溫泉餐廳", lat: 23.3150, lng: 121.3400, type: "food", day: "Day 2 美食" },
+            { name: "Our 老房子咖啡屋", lat: 23.3342, lng: 121.3138, type: "food", day: "Day 2 美食" },
+            { name: "瓦娃 (Wawa)", lat: 23.3348, lng: 121.3148, type: "food", day: "Day 2 美食" },
+            { name: "東里鐵馬驛站", lat: 23.2500, lng: 121.3000, type: "food", day: "Day 2 美食" },
+            { name: "瑞穗風情民宿", lat: 23.4985, lng: 121.3751, type: "hotel", day: "Day 2 住宿" },
+            
+            // Day 3 (Plan A & B)
+            { name: "瑞穗牧場", lat: 23.4751, lng: 121.3505, type: "spot", day: "Day 3" },
+            { name: "大農大富平地森林", lat: 23.6335, lng: 121.4155, type: "spot", day: "Day 3" },
+            { name: "大陸餃子館", lat: 23.6630, lng: 121.4230, type: "food", day: "Day 3 午餐" },
+            { name: "光復糖廠", lat: 23.6560, lng: 121.4215, type: "spot", day: "Day 3" },
+            { name: "Mr. Sam 山姆先生", lat: 23.8600, lng: 121.5150, type: "spot", day: "Day 3" },
+            // Plan A Extras
+            { name: "林田山(山線)", lat: 23.7100, lng: 121.4300, type: "spot", day: "Day 3 A案" },
+            { name: "立川漁場(山線)", lat: 23.8650, lng: 121.5200, type: "spot", day: "Day 3 A案" },
+            // Plan B Extras
+            { name: "新社梯田(海線)", lat: 23.6550, lng: 121.5450, type: "spot", day: "Day 3 B案" },
+            { name: "大石鼻山(海線)", lat: 23.6900, lng: 121.5600, type: "spot", day: "Day 3 B案" },
+            { name: "豐濱海鮮(阿慶)", lat: 23.6010, lng: 121.5535, type: "food", day: "Day 3 海線午餐" },
+            { name: "芭崎眺望台(海線)", lat: 23.7250, lng: 121.5650, type: "spot", day: "Day 3 B案" },
+            
+            { name: "香城大飯店", lat: 23.9905, lng: 121.6055, type: "hotel", day: "Day 3-4 住宿" },
+            { name: "東大門夜市", lat: 23.9735, lng: 121.6110, type: "food", day: "Day 3 晚餐" },
+            { name: "家咖哩", lat: 23.9850, lng: 121.6250, type: "food", day: "Day 3 晚餐備選" },
+            { name: "耕壽司", lat: 23.9780, lng: 121.6100, type: "food", day: "Day 3 晚餐備選" },
+
+            // Day 4
+            { name: "七星潭/柴魚博物館", lat: 24.0255, lng: 121.6350, type: "spot", day: "Day 4" },
+            { name: "液香扁食", lat: 23.9772, lng: 121.6115, type: "food", day: "Day 4 午餐" },
+            { name: "炸彈蔥油餅", lat: 23.9822, lng: 121.6135, type: "food", day: "Day 4 點心" },
+            { name: "將軍府 1936", lat: 23.9805, lng: 121.6145, type: "spot", day: "Day 4" },
+            { name: "賴桑壽司屋", lat: 23.9830, lng: 121.6050, type: "food", day: "Day 4 晚餐" },
+            // Day 4 Backups
+            { name: "Pony 咖啡廳", lat: 24.0850, lng: 121.6250, type: "backup", day: "Day 4 備選" },
+            { name: "崇德瑩農場", lat: 24.1100, lng: 121.6300, type: "backup", day: "Day 4 備選" },
+            { name: "松園別館", lat: 23.9850, lng: 121.6150, type: "backup", day: "Day 4 備選" },
+            { name: "花蓮文創園區", lat: 23.9750, lng: 121.6100, type: "backup", day: "Day 4 備選" },
+            
+            // Day 5
+            { name: "廟口紅茶", lat: 23.9760, lng: 121.6105, type: "food", day: "Day 5 早餐" },
+            { name: "靚hó花生", lat: 23.9800, lng: 121.6080, type: "food", day: "Day 5 伴手禮" },
+            { name: "皇佳味脆皮烤鴨", lat: 23.9802, lng: 121.6082, type: "food", day: "Day 5 外帶" },
+            { name: "台泥DAKA園區", lat: 24.3055, lng: 121.7630, type: "spot", day: "Day 5 野餐" },
+            { name: "南方澳觀景台", lat: 24.5750, lng: 121.8680, type: "spot", day: "Day 5" },
+            { name: "蘇澳冷泉", lat: 24.5945, lng: 121.8500, type: "spot", day: "Day 5" },
+            { name: "宜蘭餅發明館", lat: 24.6100, lng: 121.8350, type: "spot", day: "Day 5" },
+            { name: "礁溪甕窯雞", lat: 24.8355, lng: 121.7855, type: "food", day: "Day 5 晚餐" },
+            // Day 5 Backups
+            { name: "珊瑚法界博物館", lat: 24.5800, lng: 121.8650, type: "backup", day: "Day 5 備選" },
+            { name: "奇麗灣珍奶館", lat: 24.6200, lng: 121.8400, type: "backup", day: "Day 5 備選" },
+            { name: "冬山河生態綠舟", lat: 24.6350, lng: 121.7950, type: "backup", day: "Day 5 備選" },
+            { name: "傳藝中心", lat: 24.6850, lng: 121.8250, type: "backup", day: "Day 5 備選" },
+            
+            { name: "三重", lat: 25.0605, lng: 121.5005, type: "hotel", day: "Day 5 終點" }
+        ];
+
+        locations.forEach(loc => {
+            L.marker([loc.lat, loc.lng], {icon: createIcon(loc.type)})
+             .addTo(map)
+             .bindPopup(`<b>${loc.name}</b><br>${loc.day}`);
+        });
+
+        // Force new tab for all links
+        document.querySelectorAll('a.btn-link, a.ref-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open(this.href, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
