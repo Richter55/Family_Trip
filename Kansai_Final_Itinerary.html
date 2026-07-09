@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 關西親子全境 7 日專業導航手冊</title>
+    <title>2026 關西親子 8天7夜 專業導航手冊 (颱風提前應變版)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
@@ -19,8 +19,11 @@
 <body class="bg-gray-50 text-gray-800 font-sans p-4 md:p-8">
 
     <div class="max-w-7xl mx-auto">
-        <header class="mb-6 border-b-4 border-blue-800 pb-4">
-            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900">2026 關西親子全境 7 日玩樂導航手冊</h1>
+        <header class="mb-6 border-b-4 border-red-700 pb-4">
+            <div class="flex items-center gap-2">
+                <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900">2026 關西親子 8 天 7 夜導航手冊</h1>
+                <span class="bg-red-600 text-white text-xs px-2 py-1 rounded shadow animate-pulse">颱風提前版</span>
+            </div>
             <p class="text-sm md:text-base text-gray-600 mt-2 font-medium">專家規劃：老陳 | 交通：混合型(自駕+電車) | 特殊需求：無牛(No Beef)</p>
             <p class="text-xs text-blue-700 font-bold mt-1">※ 點位總覽為絕對座標，實際道路動線請點擊各日卡片中的 Google Maps 按鈕 ※</p>
         </header>
@@ -44,75 +47,83 @@
         <section class="space-y-6">
             <h2 class="text-2xl font-bold border-b pb-2">每日精密行程表與實戰導航</h2>
             
-            <!-- Day 1 -->
+            <!-- NEW Day 1 -->
             <div class="bg-white p-5 rounded-lg shadow border-l-4 border-blue-500 w-full">
                 <div class="flex flex-col lg:flex-row justify-between lg:items-center mb-3 gap-3">
-                    <h3 class="text-lg font-bold">Day 1: 神戶避暑與夜景 (7/11) <span class="text-sm font-normal text-gray-500">🚗 自駕日</span></h3>
-                    <a href="https://www.google.com/maps/dir/?api=1&origin=34.4320,135.2304&destination=34.7088,135.4371&waypoints=34.6796,135.1847|34.7212,135.2144&travelmode=driving" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-4 rounded shadow flex items-center gap-1 w-fit">
-                        開啟 Google Maps 路線導航 (至纜車站)
+                    <h3 class="text-lg font-bold">Day 1: 避險登陸與魔幻夜景 (7/10 五) <span class="text-sm font-normal text-gray-500">🚗 自駕日</span></h3>
+                    <a href="https://www.google.com/maps/dir/?api=1&origin=Kansai+International+Airport&destination=Hotel+Plaza+Kobe&waypoints=Kobe+Harborland+umie%7CMaya+Cable+Station&travelmode=driving" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-4 rounded shadow flex items-center gap-1 w-fit">
+                        開啟 Google Maps 路線導航 (D1 完整動線)
                     </a>
                 </div>
                 <ul class="text-sm space-y-1.5 text-gray-700 list-none pl-0">
-                    <li><strong class="text-gray-900">11:25</strong> KIX 關西機場抵達 ➝ <strong class="text-gray-900">12:30</strong> 機場取車出發 (預留15分熟悉車況)。</li>
-                    <li><strong class="text-gray-900">14:30</strong> 抵達 Harborland Umie (P3) 避暑 ➝ <strong class="text-gray-900">16:30</strong> Mosaic 無牛晚餐。</li>
-                    <li><strong class="text-gray-900">18:00</strong> 停車於 <strong>摩耶纜車站 (Maya Cable Sta.)</strong>。</li>
-                    <li><strong class="text-gray-900">18:30</strong> 轉乘纜車上山 ➝ <strong class="text-gray-900">19:10</strong> 掬星台夜景。</li>
-                    <li><strong class="text-gray-900">20:00</strong> 纜車下山取車 ➝ <strong class="text-gray-900">21:00</strong> 入住 <strong>Rakuten STAY 出來島</strong>。</li>
+                    <li><strong class="text-gray-900">12:50</strong> CI152 提早抵達 KIX 關西機場 ➝ <strong class="text-gray-900">14:00</strong> 租車出發 (多租一天)。</li>
+                    <li><strong class="text-gray-900">15:15</strong> 抵達 <strong>神戶六甲島廣場飯店</strong>，安頓行李。</li>
+                    <li><strong class="text-gray-900">16:00</strong> 驅車前往 Umie 避暑 ➝ <strong class="text-gray-900">16:30</strong> Mosaic 無牛晚餐 (天麩羅 えびのや)。</li>
+                    <li><strong class="text-gray-900">18:00</strong> 停車於 <strong>摩耶纜車站</strong> ➝ <strong class="text-gray-900">18:30</strong> 轉乘纜車上山。</li>
+                    <li><strong class="text-gray-900">19:10</strong> 掬星台夜景 ➝ <strong class="text-gray-900">20:30</strong> 返回 <strong>神戶六甲島廣場飯店</strong> 休息。</li>
                 </ul>
-                <div class="mt-4 text-xs bg-gray-50 p-3 rounded border border-gray-200">
-                    <strong class="text-gray-800">容錯 A/B 方案：</strong> 若遇大雨無法看夜景，改至全室內之「神戶動物王國」。<br>
-                    <strong class="text-gray-800">備選景點庫：</strong> 神戶動物王國、神戶港塔、有馬溫泉、麵包超人博物館、UCC咖啡博物館、神戶布引香草園、美利堅公園、六甲高山植物園、北野異人館、兵庫縣立美術館。
-                </div>
             </div>
 
-            <!-- Day 2 -->
-            <div class="bg-white p-5 rounded-lg shadow border-l-4 border-yellow-500 w-full">
+            <!-- NEW Day 2 -->
+            <div class="bg-white p-5 rounded-lg shadow border-l-4 border-blue-500 w-full">
                 <div class="flex flex-col lg:flex-row justify-between lg:items-center mb-3 gap-3">
-                    <h3 class="text-lg font-bold">Day 2: 甲子園熱血應援 (7/12) <span class="text-sm font-normal text-gray-500">🚃 電車日</span></h3>
-                    <a href="https://www.google.com/maps/dir/?api=1&origin=34.7088,135.4371&destination=34.7088,135.4371&waypoints=34.7176,135.3644|34.7214,135.3616&travelmode=transit" target="_blank" rel="noopener noreferrer" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-4 rounded shadow flex items-center gap-1 w-fit">
-                        開啟 Google 大眾運輸導航
+                    <h3 class="text-lg font-bold">Day 2: 神戶生態園區與轉移大阪 (7/11 六) <span class="text-sm font-normal text-gray-500">🚗 自駕日</span></h3>
+                    <a href="https://www.google.com/maps/dir/?api=1&origin=Hotel+Plaza+Kobe&destination=Rakuten+STAY+Osaka+Dekijima&waypoints=Kobe+Animal+Kingdom&travelmode=driving" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-4 rounded shadow flex items-center gap-1 w-fit">
+                        開啟 Google Maps 路線導航 (飯店➝動物王國➝大阪)
                     </a>
                 </div>
                 <ul class="text-sm space-y-1.5 text-gray-700 list-none pl-0">
-                    <li><strong class="text-gray-900">12:00</strong> 出發，搭阪神電鐵直達甲子園 ➝ <strong class="text-gray-900">12:30</strong> LaLaport 商場無牛午餐。</li>
-                    <li><strong class="text-gray-900">14:30</strong> 甲子園歷史館與球場導覽 (導覽需提前預約，時長約1小時)。</li>
-                    <li><strong class="text-gray-900">18:00</strong> 阪神虎比賽 (備妥 LaLaport 買的飯糰/炸雞，避免球場牛肉高湯)。</li>
-                    <li><strong class="text-gray-900">22:00</strong> 賽後跟隨人潮搭乘阪神電鐵返回住宿處。</li>
+                    <li><strong class="text-gray-900">09:30</strong> 飯店退房出發。</li>
+                    <li><strong class="text-gray-900">10:00</strong> 抵達 <strong>神戶動物王國 (Kobe Animal Kingdom)</strong>。室內冷氣生態園區，零距離接觸水豚！</li>
+                    <li><strong class="text-gray-900">12:30</strong> 園區內享用無牛午餐 (輕食、咖哩飯)。</li>
+                    <li><strong class="text-gray-900">14:15</strong> 驅車轉移至大阪。</li>
+                    <li><strong class="text-gray-900">15:00</strong> 入住 <strong>Rakuten STAY 大阪出來島站前</strong>。傍晚自由探索周邊覓食。</li>
                 </ul>
                 <div class="mt-4 text-xs bg-gray-50 p-3 rounded border border-gray-200">
-                    <strong class="text-gray-800">容錯 A/B 方案：</strong> 若賽程變更或遇雨延賽，改至 LaLaport 內的 KidZania 或大阪萬博 NIFREL 水族館。<br>
-                    <strong class="text-gray-800">備選景點庫：</strong> KidZania 甲子園、NIFREL 水族館、萬博紀念公園、VS PARK、杯麵博物館、箕面大瀑布、海遊館、天保山摩天輪。
+                    <strong class="text-gray-800">容錯 A/B 方案：</strong> 若不想去動物園，可改往北邊的「池田杯麵博物館」製作專屬泡麵。
                 </div>
             </div>
 
             <!-- Day 3 -->
-            <div class="bg-white p-5 rounded-lg shadow border-l-4 border-green-500 w-full">
+            <div class="bg-white p-5 rounded-lg shadow border-l-4 border-yellow-500 w-full">
                 <div class="flex flex-col lg:flex-row justify-between lg:items-center mb-3 gap-3">
-                    <h3 class="text-lg font-bold">Day 3: 琵琶湖大遷徙 (7/13) <span class="text-sm font-normal text-gray-500">🚗 自駕日</span></h3>
-                    <!-- Day 3 Google Maps URL: Added coordinates for the eastern shore road to force Google Maps to take the Sazanami Kaido instead of Expressway -->
-                    <a href="https://www.google.com/maps/dir/?api=1&origin=34.7088,135.4371&destination=35.1245,135.9333&waypoints=35.2742,136.0055|35.5034,136.1966|35.4411,136.2736|35.3780,136.2620|35.2530,136.2470&travelmode=driving" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-4 rounded shadow flex items-center gap-1 w-fit">
-                        開啟 Google Maps 路線導航 (含湖景道路)
+                    <h3 class="text-lg font-bold">Day 3: 甲子園熱血應援 (7/12 日) <span class="text-sm font-normal text-gray-500">🚃 電車日</span></h3>
+                    <a href="https://www.google.com/maps/dir/?api=1&origin=Rakuten+STAY+Osaka+Dekijima&destination=Rakuten+STAY+Osaka+Dekijima&waypoints=LaLaport+Koshien%7CHanshin+Koshien+Stadium&travelmode=transit" target="_blank" rel="noopener noreferrer" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-4 rounded shadow flex items-center gap-1 w-fit">
+                        開啟 Google 大眾運輸導航
                     </a>
                 </div>
-                <p class="text-xs text-red-600 font-bold mb-3">※ 導航連結已強制設定湖畔中繼點。開車時若系統重新規劃，請手動選擇『避開收費站』以確保行駛さざなみ街道。</p>
                 <ul class="text-sm space-y-1.5 text-gray-700 list-none pl-0">
-                    <li><strong class="text-gray-900">09:00</strong> 往北出發 ➝ <strong class="text-gray-900">10:45</strong> 白鬚神社 (於安全區域拍照，嚴禁穿越馬路)。</li>
-                    <li><strong class="text-gray-900">12:00</strong> 木之本老街享用無牛午餐與傳奇大根麵包。</li>
-                    <li><strong class="text-gray-900">13:10</strong> 賤岳纜車登高 (最晚 14:40 下山離開)。</li>
-                    <li><strong class="text-gray-900">15:00</strong> 抵達 <strong>小谷城遺址導覽館 淺井三代之里</strong> (16:30 停止入館)。</li>
-                    <li><strong class="text-gray-900">16:00</strong> 走湖畔さざなみ街道(縣道559)南下 ➝ <strong class="text-gray-900">17:15</strong> 入住 <strong>琵琶湖萬豪酒店</strong>。</li>
+                    <li><strong class="text-gray-900">12:00</strong> 出發，搭阪神電鐵直達甲子園站 (本日車輛停在飯店，免自駕)。</li>
+                    <li><strong class="text-gray-900">12:30</strong> 抵達 LaLaport 甲子園。2F 美食街享用無牛午餐並避暑。</li>
+                    <li><strong class="text-gray-900">14:30</strong> 甲子園歷史館與球場導覽 (需預約)。</li>
+                    <li><strong class="text-gray-900">18:00</strong> 阪神虎比賽 (備妥 LaLaport 買的飯糰/炸雞，避免球場牛肉高湯)。</li>
+                    <li><strong class="text-gray-900">22:00</strong> 賽後搭乘阪神電鐵返回出來島住宿。</li>
                 </ul>
-                <div class="mt-4 text-xs bg-gray-50 p-3 rounded border border-gray-200">
-                    <strong class="text-gray-800">容錯 A/B 方案：</strong> 若兒童體力透支，刪除賤岳登高，從淺井離開後直奔室內之「琵琶湖博物館」。<br>
-                    <strong class="text-gray-800">備選景點庫：</strong> 近江八幡水鄉、La Collina、長濱黑壁廣場、琵琶湖博物館、佐川美術館、滋賀農業公園、牧野水杉林蔭大道、滿月寺浮御堂、滋賀縣立美術館、大津市科學館。
-                </div>
             </div>
 
             <!-- Day 4 -->
+            <div class="bg-white p-5 rounded-lg shadow border-l-4 border-green-500 w-full">
+                <div class="flex flex-col lg:flex-row justify-between lg:items-center mb-3 gap-3">
+                    <h3 class="text-lg font-bold">Day 4: 琵琶湖大遷徙 (7/13 一) <span class="text-sm font-normal text-gray-500">🚗 自駕日</span></h3>
+                    <a href="https://www.google.com/maps/dir/?api=1&origin=Rakuten+STAY+Osaka+Dekijima&destination=Lake+Biwa+Marriott+Hotel&waypoints=Shirahige+Shrine%7CShizugatake+Lift%7CAsai+History+and+Folklore+Museum%7C35.3780,136.2620&travelmode=driving" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-4 rounded shadow flex items-center gap-1 w-fit">
+                        開啟 Google Maps 路線導航 (含湖景道路)
+                    </a>
+                </div>
+                <p class="text-xs text-red-600 font-bold mb-3">※ 導航連結已設定湖畔中繼點。若系統重新規劃，請手動選擇『避開收費站』確保行駛さざなみ街道。</p>
+                <ul class="text-sm space-y-1.5 text-gray-700 list-none pl-0">
+                    <li><strong class="text-gray-900">09:00</strong> 往北出發 ➝ <strong class="text-gray-900">10:45</strong> 白鬚神社 (拍照嚴禁穿越馬路)。</li>
+                    <li><strong class="text-gray-900">12:00</strong> 木之本老街享用無牛午餐與傳奇大根麵包。</li>
+                    <li><strong class="text-gray-900">13:10</strong> 賤岳纜車登高 (最晚 14:40 離開)。</li>
+                    <li><strong class="text-gray-900">15:00</strong> 抵達 <strong>小谷城遺址導覽館 淺井三代之里</strong> (16:30 停止入館)。</li>
+                    <li><strong class="text-gray-900">16:00</strong> 走湖畔さざなみ街道(縣道559)南下 ➝ <strong class="text-gray-900">17:15</strong> 入住 <strong>琵琶湖萬豪酒店</strong>。</li>
+                </ul>
+            </div>
+
+            <!-- Day 5 -->
             <div class="bg-white p-5 rounded-lg shadow border-l-4 border-indigo-500 w-full">
                 <div class="flex flex-col lg:flex-row justify-between lg:items-center mb-3 gap-3">
-                    <h3 class="text-lg font-bold">Day 4: 國寶名城與還車 (7/14) <span class="text-sm font-normal text-gray-500">🚗 自駕轉電車</span></h3>
-                    <a href="https://www.google.com/maps/dir/?api=1&origin=35.1245,135.9333&destination=34.6657,135.5065&waypoints=35.2764,136.2518|35.1569,136.1362&travelmode=driving" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-4 rounded shadow flex items-center gap-1 w-fit">
+                    <h3 class="text-lg font-bold">Day 5: 國寶名城與還車 (7/14 二) <span class="text-sm font-normal text-gray-500">🚗 自駕轉電車</span></h3>
+                    <a href="https://www.google.com/maps/dir/?api=1&origin=Lake+Biwa+Marriott+Hotel&destination=Nippombashi+Station&waypoints=Hikone+Castle%7CNobunaga+no+Yakata%7CToyota+Rent+A+Car+Namba&travelmode=driving" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-4 rounded shadow flex items-center gap-1 w-fit">
                         開啟 Google Maps 路線導航
                     </a>
                 </div>
@@ -121,39 +132,31 @@
                     <li><strong class="text-gray-900">12:15</strong> 夢京橋城堡大道 無牛午餐 (比內地雞) ➝ <strong class="text-gray-900">13:30</strong> 往南出發。</li>
                     <li><strong class="text-gray-900">14:10</strong> 信長之館 / 安土城參觀 (最晚 15:40 離開)。</li>
                     <li><strong class="text-gray-900">15:40</strong> 走名神高速往大阪 ➝ <strong class="text-gray-900">17:00</strong> 難波 Toyota 滿油還車 (避開18:00塞車)。</li>
-                    <li><strong class="text-gray-900">18:00</strong> 入住 <strong>b&黑門4號店</strong> ➝ 步行至商圈晚餐。</li>
+                    <li><strong class="text-gray-900">18:00</strong> 入住 <strong>b&黑門4號店</strong> ➝ 難波商圈晚餐。</li>
                 </ul>
-                <div class="mt-4 text-xs bg-gray-50 p-3 rounded border border-gray-200">
-                    <strong class="text-gray-800">容錯 A/B 方案：</strong> 若遇雨天不宜攀爬木階梯，改至大阪市區的「大阪兒童樂園」。<br>
-                    <strong class="text-gray-800">備選景點庫：</strong> 大阪兒童樂園、大阪生活今昔館、梅田藍天大廈、萬博紀念公園、大阪城天守閣、通天閣、天王寺動物園、阿倍野展望台、黑門市場、心齋橋筋商店街。
-                </div>
             </div>
 
-            <!-- Day 5 to Day 7 -->
+            <!-- Day 6 to Day 8 -->
             <div class="bg-white p-5 rounded-lg shadow border-l-4 border-purple-500 w-full">
                 <div class="flex flex-col lg:flex-row justify-between lg:items-center mb-3 gap-3">
-                    <h3 class="text-lg font-bold">Day 5 - 7: USJ 極限與返台 (7/15-17) <span class="text-sm font-normal text-gray-500">🚃 電車/巴士日</span></h3>
+                    <h3 class="text-lg font-bold">Day 6 - 8: USJ 極限與返台 (7/15-17) <span class="text-sm font-normal text-gray-500">🚃 電車/巴士日</span></h3>
                     <div class="flex flex-wrap gap-2">
-                        <a href="https://www.google.com/maps/dir/?api=1&origin=34.6657,135.5065&destination=34.6678,135.4385&travelmode=transit" target="_blank" rel="noopener noreferrer" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-3 rounded shadow flex items-center gap-1">D5 轉場環球</a>
-                        <a href="https://www.google.com/maps/dir/?api=1&origin=34.6678,135.4385&destination=34.4320,135.2304&travelmode=transit" target="_blank" rel="noopener noreferrer" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-3 rounded shadow flex items-center gap-1">D7 直達機場</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Nippombashi+Station&destination=Hotel+Keihan+Universal+Tower&travelmode=transit" target="_blank" rel="noopener noreferrer" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-3 rounded shadow flex items-center gap-1">D6 轉場環球</a>
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Hotel+Keihan+Universal+Tower&destination=Kansai+International+Airport&travelmode=transit" target="_blank" rel="noopener noreferrer" class="bg-green-600 hover:bg-green-700 text-white text-xs font-bold py-2 px-3 rounded shadow flex items-center gap-1">D8 直達機場</a>
                     </div>
                 </div>
                 <ul class="text-sm space-y-2 text-gray-700 list-none pl-0">
-                    <li><strong class="text-purple-700">【Day 5】</strong> <strong class="text-gray-900">09:30</strong> 車站寄行李 ➝ 市區休閒 ➝ <strong class="text-gray-900">14:00</strong> 轉乘JR ➝ <strong class="text-gray-900">15:30</strong> 入住 <strong>京阪環球塔飯店</strong>。</li>
-                    <li><strong class="text-purple-700">【Day 6】</strong> <strong class="text-gray-900">07:00</strong> 抵達 USJ 門口排隊 ➝ 全日攻堅瑪利歐與哈利波特 (中午務必至室內避暑)。</li>
-                    <li><strong class="text-purple-700">【Day 7】</strong> <strong class="text-gray-900">09:10</strong> 飯店搭乘利木津巴士直達 KIX ➝ <strong class="text-gray-900">13:10</strong> 班機返台。</li>
+                    <li><strong class="text-purple-700">【Day 6 (7/15)】</strong> <strong class="text-gray-900">09:30</strong> 車站寄行李 ➝ 市區休閒 ➝ <strong class="text-gray-900">14:00</strong> 轉乘JR ➝ <strong class="text-gray-900">15:30</strong> 入住 <strong>京阪環球塔飯店</strong>。</li>
+                    <li><strong class="text-purple-700">【Day 7 (7/16)】</strong> <strong class="text-gray-900">07:00</strong> 抵達 USJ 門口排隊 ➝ 全日攻堅瑪利歐與哈利波特 (中午務必至室內避暑)。</li>
+                    <li><strong class="text-purple-700">【Day 8 (7/17)】</strong> <strong class="text-gray-900">09:10</strong> 飯店樓下搭乘「利木津巴士」直達 KIX ➝ <strong class="text-gray-900">13:10</strong> 班機 (CI157) 返台。</li>
                 </ul>
-                <div class="mt-4 text-xs bg-gray-50 p-3 rounded border border-gray-200">
-                    <strong class="text-gray-800">容錯 A/B 方案：</strong> Day 5 市區行程若人潮擁擠，可將黑門市場改為天王寺/阿倍野商圈。<br>
-                    <strong class="text-gray-800">備選景點庫：</strong> 大阪樂高樂園探索中心、SPA WORLD 溫泉大世界、中之島公園、天神橋筋商店街、四天王寺。
-                </div>
             </div>
         </section>
     </div>
 
     <script>
         // Initialize Map
-        const map = L.map('map').setView([34.9, 135.7], 9);
+        const map = L.map('map').setView([34.9, 135.5], 9);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18, 
             attribution: '© OpenStreetMap'
@@ -167,9 +170,11 @@
             return L.divIcon({ html: `<div class="${cls}"></div>`, className: '', iconSize: [16,16], iconAnchor: [8,8] });
         }
 
-        // Coordinates Data (Fixed Asai coordinates and removed lake-center point)
+        // Coordinates Data
         const pts = {
             kix: [34.4320, 135.2304], 
+            kobeHotel: [34.6881, 135.2687], // 神戶六甲島廣場飯店
+            kobeAnimal: [34.6468, 135.2217], // 神戶動物王國
             umie: [34.6796, 135.1847], 
             mayaCable: [34.7212, 135.2144], 
             mayaTop: [34.7335, 135.2025],   
@@ -178,7 +183,7 @@
             lalaport: [34.7176, 135.3644],
             shirahige: [35.2742, 136.0055], 
             kinomoto: [35.5034, 136.1966], 
-            asai: [35.4411, 136.2736], // Corrected absolute coordinates for Asai Odani Guide Hall
+            asai: [35.4411, 136.2736], 
             marriott: [35.1245, 135.9333], 
             hikone: [35.2764, 136.2518], 
             azuchi: [35.1569, 136.1362], 
@@ -187,65 +192,74 @@
             usj: [34.6654, 135.4323]
         };
 
-        // Day 1 Group
+        // NEW Day 1 Group
         const d1_nodes = [
             L.marker(pts.kix, {icon: createIcon('transport')}).bindPopup("<b>Day1: 關西機場</b>"),
-            L.marker(pts.umie, {icon: createIcon('attraction')}).bindPopup("<b>Day1: Umie 避暑/晚餐</b>"),
+            L.marker(pts.kobeHotel, {icon: createIcon('hotel')}).bindPopup("<b>Day1住宿: 神戶六甲島廣場飯店</b>"),
+            L.marker(pts.umie, {icon: createIcon('attraction')}).bindPopup("<b>Day1: Umie 商場</b>"),
             L.marker(pts.mayaCable, {icon: createIcon('parking')}).bindPopup("<b>Day1: 摩耶纜車站停車處</b>"),
-            L.marker(pts.mayaTop, {icon: createIcon('attraction')}).bindPopup("<b>Day1: 摩耶山夜景</b>"),
-            L.marker(pts.dekijima, {icon: createIcon('hotel')}).bindPopup("<b>住宿: 樂天STAY 出來島</b>")
+            L.marker(pts.mayaTop, {icon: createIcon('attraction')}).bindPopup("<b>Day1: 摩耶山夜景</b>")
         ];
         const d1_layer = L.layerGroup(d1_nodes);
 
-        // Day 2 Group
+        // NEW Day 2 Group
         const d2_nodes = [
-            L.marker(pts.dekijima, {icon: createIcon('hotel')}),
-            L.marker(pts.koshien, {icon: createIcon('attraction')}).bindPopup("<b>Day2: 甲子園球場</b>"),
-            L.marker(pts.lalaport, {icon: createIcon('transport')}).bindPopup("<b>Day2: LaLaport</b>")
+            L.marker(pts.kobeHotel, {icon: createIcon('hotel')}),
+            L.marker(pts.kobeAnimal, {icon: createIcon('attraction')}).bindPopup("<b>Day2: 神戶動物王國</b>"),
+            L.marker(pts.dekijima, {icon: createIcon('hotel')}).bindPopup("<b>Day2-3住宿: 樂天STAY 出來島</b>")
         ];
         const d2_layer = L.layerGroup(d2_nodes);
 
-        // Day 3 Group
+        // Day 3 (Old Day 2)
         const d3_nodes = [
             L.marker(pts.dekijima, {icon: createIcon('hotel')}),
-            L.marker(pts.shirahige, {icon: createIcon('attraction')}).bindPopup("<b>Day3: 白鬚神社</b>"),
-            L.marker(pts.kinomoto, {icon: createIcon('attraction')}).bindPopup("<b>Day3: 賤岳/木之本</b>"),
-            L.marker(pts.asai, {icon: createIcon('attraction')}).bindPopup("<b>Day3: 小谷城遺址導覽館 淺井三代之里</b>"),
-            L.marker(pts.marriott, {icon: createIcon('hotel')}).bindPopup("<b>住宿: 琵琶湖萬豪酒店</b>")
+            L.marker(pts.koshien, {icon: createIcon('attraction')}).bindPopup("<b>Day3: 甲子園球場</b>"),
+            L.marker(pts.lalaport, {icon: createIcon('transport')}).bindPopup("<b>Day3: LaLaport</b>")
         ];
         const d3_layer = L.layerGroup(d3_nodes);
 
-        // Day 4 Group
+        // Day 4 (Old Day 3)
         const d4_nodes = [
-            L.marker(pts.marriott, {icon: createIcon('hotel')}),
-            L.marker(pts.hikone, {icon: createIcon('attraction')}).bindPopup("<b>Day4: 彥根城</b>"),
-            L.marker(pts.azuchi, {icon: createIcon('attraction')}).bindPopup("<b>Day4: 信長之館</b>"),
-            L.marker(pts.namba, {icon: createIcon('hotel')}).bindPopup("<b>住宿: b&黑門4號店</b>")
+            L.marker(pts.dekijima, {icon: createIcon('hotel')}),
+            L.marker(pts.shirahige, {icon: createIcon('attraction')}).bindPopup("<b>Day4: 白鬚神社</b>"),
+            L.marker(pts.kinomoto, {icon: createIcon('attraction')}).bindPopup("<b>Day4: 賤岳/木之本</b>"),
+            L.marker(pts.asai, {icon: createIcon('attraction')}).bindPopup("<b>Day4: 小谷城遺址導覽館</b>"),
+            L.marker(pts.marriott, {icon: createIcon('hotel')}).bindPopup("<b>Day4-5住宿: 琵琶湖萬豪酒店</b>")
         ];
         const d4_layer = L.layerGroup(d4_nodes);
 
-        // Day 5-7 Group
-        const d5_7_nodes = [
-            L.marker(pts.namba, {icon: createIcon('hotel')}),
-            L.marker(pts.usjHotel, {icon: createIcon('hotel')}).bindPopup("<b>住宿: 京阪環球塔飯店</b>"),
-            L.marker(pts.usj, {icon: createIcon('attraction')}).bindPopup("<b>Day6: USJ 環球影城</b>"),
-            L.marker(pts.kix, {icon: createIcon('transport')}).bindPopup("<b>Day7: 關西機場</b>")
+        // Day 5 (Old Day 4)
+        const d5_nodes = [
+            L.marker(pts.marriott, {icon: createIcon('hotel')}),
+            L.marker(pts.hikone, {icon: createIcon('attraction')}).bindPopup("<b>Day5: 彥根城</b>"),
+            L.marker(pts.azuchi, {icon: createIcon('attraction')}).bindPopup("<b>Day5: 信長之館</b>"),
+            L.marker(pts.namba, {icon: createIcon('hotel')}).bindPopup("<b>Day5住宿: b&黑門4號店</b>")
         ];
-        const d5_7_layer = L.layerGroup(d5_7_nodes);
+        const d5_layer = L.layerGroup(d5_nodes);
 
-        // Layer Controls
+        // Day 6-8
+        const d6_8_nodes = [
+            L.marker(pts.namba, {icon: createIcon('hotel')}),
+            L.marker(pts.usjHotel, {icon: createIcon('hotel')}).bindPopup("<b>Day6-7住宿: 京阪環球塔飯店</b>"),
+            L.marker(pts.usj, {icon: createIcon('attraction')}).bindPopup("<b>Day7: USJ 環球影城</b>"),
+            L.marker(pts.kix, {icon: createIcon('transport')}).bindPopup("<b>Day8: 關西機場</b>")
+        ];
+        const d6_8_layer = L.layerGroup(d6_8_nodes);
+
+        // Layer Controls (Markers Only)
         const overlays = {
-            "📍 Day 1 地點標記": d1_layer,
-            "📍 Day 2 地點標記": d2_layer,
-            "📍 Day 3 地點標記": d3_layer,
-            "📍 Day 4 地點標記": d4_layer,
-            "📍 Day 5-7 地點標記": d5_7_layer
+            "📍 Day 1: 神戶夜景": d1_layer,
+            "📍 Day 2: 神戶動物王國": d2_layer,
+            "📍 Day 3: 甲子園賽事": d3_layer,
+            "📍 Day 4: 琵琶湖大遷徙": d4_layer,
+            "📍 Day 5: 戰國名城還車": d5_layer,
+            "📍 Day 6-8: USJ與返程": d6_8_layer
         };
         L.control.layers(null, overlays, {collapsed: false}).addTo(map);
         
-        // Show Day 1 and 3 by default
+        // Show Day 1 and Day 2 by default
         d1_layer.addTo(map);
-        d3_layer.addTo(map);
+        d2_layer.addTo(map);
     </script>
 </body>
 </html>
