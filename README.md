@@ -10,7 +10,7 @@
 |------|------|------|
 | 關西最終行程表 | [線上查看](https://richter55.github.io/Family_Trip/Kansai_Final_Itinerary.html) | 關西旅遊的完整行程規劃 |
 | 南橫東部5日遊 | [線上查看](https://richter55.github.io/Family_Trip/%E5%8D%97%E6%A9%A5%E6%9D%B1%E9%83%A85%E6%97%A5%E9%81%8A.html) | 南橫東部地區的5天4夜行程 |
-| 20260727 忍400一日租車遊 | [線上查看](https://richter55.github.io/Family_Trip/20260727%20%E5%BF%8D400%E4%B8%80%E6%97%A5%E7%A7%8D%E8%BB%8A%E9%81%8A.html) | 使用忍400租車的一日行程（2026/07/27） |
+| 20260727 忍400一日租車遊 | [線上查看](https://richter55.github.io/Family_Trip/20260727_ninja400_1daytour.html) | 使用忍400租車的一日行程（2026/07/27） |
 
 > ⚠️ 如果你在本地看到的檔名是中文或包含空白，當轉成 GitHub Pages URL 時會被 URL 編碼（如上例）。為避免編碼混淆，建議未來檔名使用英文或在上傳後確認 Pages 頁面是否可以正確連到該檔案。
 
@@ -18,7 +18,7 @@
 
 - 📄 [Kansai_Final_Itinerary.html](./Kansai_Final_Itinerary.html)
 - 📄 [南橫東部5日遊.html](./南橫東部5日遊.html)
-- 📄 [20260727 忍400一日租車遊.html](./20260727%20%E5%BF%8D400%E4%B8%80%E6%97%A5%E7%A7%8D%E8%BB%8A%E9%81%8A.html)
+- 📄 [20260727 忍400一日租車遊.html](./20260727_ninja400_1daytour.html)
 
 ---
 
