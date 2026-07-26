@@ -10,15 +10,15 @@
 |------|------|------|
 | 關西最終行程表 | [線上查看](https://richter55.github.io/Family_Trip/Kansai_Final_Itinerary.html) | 關西旅遊的完整行程規劃 |
 | 南橫東部5日遊 | [線上查看](https://richter55.github.io/Family_Trip/%E5%8D%97%E6%A9%A5%E6%9D%B1%E9%83%A85%E6%97%A5%E9%81%8A.html) | 南橫東部地區的5天4夜行程 |
-| 忍400一日租車遊 | [線上查看](https://richter55.github.io/Family_Trip/%E5%BF%8D400%E4%B8%80%E6%97%A5%E7%A7%8D%E8%BB%8A%E9%81%8A.html) | 使用忍400租車的一日行程 |
+| 20260727 忍400一日租車遊 | [線上查看](https://richter55.github.io/Family_Trip/20260727%20%E5%BF%8D400%E4%B8%80%E6%97%A5%E7%A7%8D%E8%BB%8A%E9%81%8A.html) | 使用忍400租車的一日行程（2026/07/27） |
 
-> ⚠️ 如果你在本地看到的檔名是中文，當轉成 GitHub Pages URL 時會被 URL 編碼（如上例）。為避免編碼混淆，建議未來檔名使用英文或在上傳後確認 Pages 頁面是否可以正確連到該檔案。
+> ⚠️ 如果你在本地看到的檔名是中文或包含空白，當轉成 GitHub Pages URL 時會被 URL 編碼（如上例）。為避免編碼混淆，建議未來檔名使用英文或在上傳後確認 Pages 頁面是否可以正確連到該檔案。
 
 ### 快速連結
 
 - 📄 [Kansai_Final_Itinerary.html](./Kansai_Final_Itinerary.html)
 - 📄 [南橫東部5日遊.html](./南橫東部5日遊.html)
-- 📄 [忍400一日租車遊.html](./忍400一日租車遊.html)
+- 📄 [20260727 忍400一日租車遊.html](./20260727%20%E5%BF%8D400%E4%B8%80%E6%97%A5%E7%A7%8D%E8%BB%8A%E9%81%8A.html)
 
 ---
 
@@ -33,10 +33,10 @@
 4. 等待幾分鐘，然後到 `https://<你的使用者名稱>.github.io/Family_Trip/`（本專案為 `https://richter55.github.io/Family_Trip/`）檢查頁面是否上線。
 
 如果看到 404 或檔案找不到：
-- 確認你啟用 Pages 的分支包含那些 HTML 檔案（例如 `Kansai_Final_Itinerary.html`、`南橫東部5日遊.html` 與 `忍400一日租車遊.html`）。
-- 若檔名含有非 ASCII 字元（例如中文），URL 會被編碼，請使用 repo 的檔案列表複製檔案連結或改成英文字檔名以避免問題。
+- 確認你啟用 Pages 的分支包含那些 HTML 檔案（例如 `Kansai_Final_Itinerary.html`、`南橫東部5日遊.html` 與 `20260727 忍400一日租車遊.html`）。
+- 若檔名含有非 ASCII 字元或空白（例如中文或空格），URL 會被編碼，請使用 repo 的檔案列表複製檔案連結或改成英文字檔名以避免問題。
 
 
 ---
 
-*最後更新：2026年7月26日*
+*最後更新：2026年7月27日*
